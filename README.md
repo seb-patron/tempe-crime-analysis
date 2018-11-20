@@ -4,9 +4,8 @@
 An analysis of crime in Tempe using data from both the city of Tempe and Arizona State University's police department. Features downloading and inserting data into a PostgreSQL database, data cleanup, and visualizations with matplotlib and google maps.
 
 
-**Note:** Requires Rails 5.2
 
-###\ Getting Started
+### Getting Started
 
 Analysis is done in Jupyter notebooks and uses anaconda to manage the environment
 
