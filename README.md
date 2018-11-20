@@ -5,11 +5,11 @@ An analysis of crime in Tempe using data from both the city of Tempe and Arizona
 
 
 
-### Getting Started
+## Getting Started
 
 Analysis is done in Jupyter notebooks and uses anaconda to manage the environment
 
-#### Requirements
+### Requirements
 
 You'll need the following installed to run the analysis successfully:
 
