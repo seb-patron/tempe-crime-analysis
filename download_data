@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo "Downloading and preparing data..."
+echo "Dowloading General Police Offense Data. For more info visit https://data-tempegov.opendata.arcgis.com/datasets/02533928ed1649d2ac773c8ebf50f37d_1?geometry=-111.959%2C33.414%2C-111.899%2C33.426"
+
+# download the general police offense data into data/raw folder
+curl -o ./data/raw/Police_General_Offense.csv https://opendata.arcgis.com/datasets/02533928ed1649d2ac773c8ebf50f37d_1.csv
+
+echo "Dowloading ASU Offense Data. For more info visit https://moto.data.socrata.com/dataset/Arizona-State-University-Police-Department/6fzp-yqnh"
+
+# download the asu offense data into data/raw folder
+curl -o ./data/raw/Arizona_State_University_Police_Department.csv https://moto.data.socrata.com/api/views/6fzp-yqnh/rows.csv?accessType=DOWNLOAD
+
+echo "Creating Postgres Database and populating with CSVs..."
+
+psql postgres -U sebdev -f db_setup.sql
