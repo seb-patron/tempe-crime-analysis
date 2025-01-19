@@ -1,5 +1,6 @@
 name: crime-analysis
 channels:
+- conda-forge
 - anaconda
 - defaults
 dependencies:
@@ -9,6 +10,7 @@ dependencies:
 - openssl=1.0.2p=h1de35cc_0
 - psycopg2=2.7.5=py37hdbc3d79_0
 - python=3.7.0=hc167b69_0
+- python-dotenv=0.9.1=py_0
 - appnope=0.1.0=py37_0
 - asn1crypto=0.24.0=py37_0
 - backcall=0.1.0=py37_0
