@@ -62,6 +62,9 @@ scratch/
 # Misc
 .DS_Store
 
+# environmental variables
+.env
+
 # Files/data science related
 *.csv
 *.xlx
