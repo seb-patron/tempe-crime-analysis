@@ -17,8 +17,8 @@ CREATE DATABASE phoenix_crimes;
 - reads in all data from csv
 */
 CREATE TABLE temporary_tempe_pd_offenses (
-     x VARCHAR,
-     y VARCHAR,
+     x REAL,
+     y REAL,
      OBJECTID VARCHAR,
      primary_key VARCHAR,
      occ_dt VARCHAR,
@@ -38,8 +38,8 @@ CREATE TABLE temporary_tempe_pd_offenses (
 */
 CREATE TABLE tempe_pd_offenses (
   id VARCHAR PRIMARY KEY,
-  latitude VARCHAR,
-  longitude VARCHAR,
+  latitude REAL,
+  longitude REAL,
   incident_datetime VARCHAR,
   incident_address VARCHAR,
   disclaimer VARCHAR,
@@ -49,7 +49,7 @@ CREATE TABLE tempe_pd_offenses (
 );
 
 -- Copy the Police_General_Offense csv into the temporary_tempe_pd_offenses table
-\copy temporary_tempe_pd_offenses (X,Y,OBJECTID,primary_key,occ_dt,obfAddress,x_rand,y_rand,disclaimer,place_name,OffenseCustom,locationTranslation) FROM './data/raw/Police_General_Offense.csv' WITH (format csv)
+\copy temporary_tempe_pd_offenses (X,Y,OBJECTID,primary_key,occ_dt,obfAddress,x_rand,y_rand,disclaimer,place_name,OffenseCustom,locationTranslation) FROM './data/raw/Police_General_Offense.csv' CSV HEADER;
 
 -- take the temporary_tempe_pd_offenses, select only the rows we want, and insert them into tempe_pd_offenses
 -- note that some of the names are changed for better readibity, so our selections might have different column names
@@ -76,8 +76,8 @@ CREATE TABLE temporary_asu_pd_offenses (
      incident_state VARCHAR,
      zip VARCHAR,
      country VARCHAR,
-     latitude VARCHAR,
-     longitude VARCHAR,
+     latitude REAL,
+     longitude REAL,
      created_at VARCHAR,
      updated_at VARCHAR,
      location_tuple VARCHAR,
@@ -93,10 +93,10 @@ CREATE TABLE temporary_asu_pd_offenses (
 */
 CREATE TABLE asu_pd_offenses (
   id VARCHAR PRIMARY KEY,
-  case_num VARCHAR,
+  case_number VARCHAR,
   incident_datetime VARCHAR,
-  latitude VARCHAR,
-  longitude VARCHAR,
+  latitude REAL,
+  longitude REAL,
   incident_address VARCHAR,
   city VARCHAR,
   offense VARCHAR,
@@ -104,12 +104,12 @@ CREATE TABLE asu_pd_offenses (
 );
 
 -- Copy the Arizona_State_University_Police_Department csv into the temporary_asu_pd_offenses table
-\copy temporary_asu_pd_offenses (incident_id,case_number,incident_datetime,incident_type_primary,incident_description,clearance_type,address_1,address_2,city,incident_state,zip,country,latitude,longitude,created_at,updated_at,location_tuple,hour_of_day,day_of_week,parent_incident_type) FROM './data/raw/Arizona_State_University_Police_Department.csv' WITH (format csv)
+\copy temporary_asu_pd_offenses (incident_id,case_number,incident_datetime,incident_type_primary,incident_description,clearance_type,address_1,address_2,city,incident_state,zip,country,latitude,longitude,created_at,updated_at,location_tuple,hour_of_day,day_of_week,parent_incident_type) FROM './data/raw/Arizona_State_University_Police_Department.csv' CSV HEADER;
 
 -- take the asu_pd_offenses, select only the rows we want, and insert them into asu_pd_offenses
 -- note that some of the names are changed for better readibity, so our selections might have different column names
-insert into asu_pd_offenses (id, latitude, longitude, incident_datetime, incident_address, city, offense, offense_type) 
-select incident_id, latitude, longitude, incident_datetime, address_1, city, incident_description, parent_incident_type
+insert into asu_pd_offenses (id, case_number, latitude, longitude, incident_datetime, incident_address, city, offense, offense_type) 
+select incident_id, case_number, latitude, longitude, incident_datetime, address_1, city, incident_description, parent_incident_type
 from temporary_asu_pd_offenses;
 
 
